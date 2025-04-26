@@ -1,13 +1,13 @@
-var gridBox = document.querySelector(".gridBox");
-var newGridBtn = document.getElementById("newGridBtn");
-var clearBtn = document.getElementById("clearBtn");
-var gridSizeOptions = document.querySelector(".gridSizeOptions");
-var gridSize = 16;
-var boxSize = 30;
+const gridBox = document.querySelector(".gridBox");
+const newGridBtn = document.getElementById("newGridBtn");
+const clearBtn = document.getElementById("clearBtn");
+const gridSizeOptions = document.querySelector(".gridSizeOptions");
+let gridSize = 16;
+let boxSize = 30;
 
 function getRandomColor() {
-    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    var paddedColor = randomColor.length < 6 ? '0'.repeat(6 - randomColor.length) + randomColor : randomColor;
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    const paddedColor = randomColor.length < 6 ? '0'.repeat(6 - randomColor.length) + randomColor : randomColor;
     return "#" + paddedColor;
 }
 
@@ -17,8 +17,8 @@ function createGrid() {
     gridBox.style.width = (gridSize * boxSize + ((gridSize + 1) * 2)) + "px";
     gridBox.style.height = (gridSize * boxSize + 4) + "px";
 
-    for (var i = 0; i < gridSize * gridSize; i++) {
-        var newBox = document.createElement("div");
+    for (let i = 0; i < gridSize * gridSize; i++) {
+        let newBox = document.createElement("div");
         newBox.className = "sketchBox";
         newBox.addEventListener("mouseover", function() {
             this.style.backgroundColor = getRandomColor();
@@ -34,7 +34,7 @@ function handleNewGrid() {
 }
 
 function handleGridSizeChange(event) {
-    var size = event.target.getAttribute("data-size");
+    const size = event.target.getAttribute("data-size");
     if (size) {
         gridSize = parseInt(size, 10);
         createGrid();
@@ -45,7 +45,7 @@ function handleGridSizeChange(event) {
 }
 
 function clearGrid() {
-    var sketchBoxes = gridBox.querySelectorAll(".sketchBox");
+    let sketchBoxes = gridBox.querySelectorAll(".sketchBox");
     sketchBoxes.forEach(function(box) {
         box.style.backgroundColor = "";
     });
@@ -58,7 +58,7 @@ createGrid();
 newGridBtn.addEventListener("click", handleNewGrid);
 clearBtn.addEventListener("click", clearGrid);
 
-var gridSizeButtons = document.querySelectorAll(".gridSizeOption");
+const gridSizeButtons = document.querySelectorAll(".gridSizeOption");
 gridSizeButtons.forEach(function(button) {
     button.addEventListener("click", handleGridSizeChange);
 });
